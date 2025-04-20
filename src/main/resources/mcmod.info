@@ -1,0 +1,16 @@
+[
+{
+  "modid": "amethyst",
+  "name": "Amethyst Client",
+  "description": "A dungeons qol mod intended to be used on the skyblock minigame of the hypixel network (singleplayer)",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["UltimateBoi"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+] 

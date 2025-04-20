@@ -47,3 +47,20 @@ bin/
 run/
 build/
 .gradle/
+
+# Build artifacts and temporary files
+*.log
+*.tmp
+*.temp
+*.hprof
+tmp/
+temp/
+
+# Local configuration files
+local.properties
+
+# Coverage reports (if using Jacoco or similar tools)
+jacoco.exec
+build/reports/
+
+usefulConsoleCMDS.txt
