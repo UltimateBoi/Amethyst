@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import com.amethyst.AmethystMessage;
 import com.amethyst.Format;
+import com.amethyst.gui.ClickGui; // Import ClickGui
 
 public class AmethystCommand extends CommandBase {
 
@@ -32,6 +33,14 @@ public class AmethystCommand extends CommandBase {
 
     @Override
     public void processCommand(ICommandSender sender, String[] args) throws CommandException {
+        if (args.length > 0 && args[0].equalsIgnoreCase("help")) {
+            showHelp(sender);
+        } else {
+            ClickGui.open(); // Open the ClickGUI
+        }
+    }
+
+    private void showHelp(ICommandSender sender) {
         String formattedMessage = Format.format("&7Amethyst Client v1.0 &8- &dA simple dungeons qol by &lUltimate&r&d!");
         AmethystMessage.sendClientMessage(sender, formattedMessage);
     }
