@@ -15,11 +15,13 @@ import net.minecraft.util.ResourceLocation; // Added import
 import org.lwjgl.opengl.GL12; // for GL12.GL_CLAMP_TO_EDGE
 import org.lwjgl.opengl.GL14; // for GL14.GL_MIRRORED_REPEAT
 
+// Renamed class back to GameInfoGui
 public class GameInfoGui extends Gui {
     private final Minecraft mc = Minecraft.getMinecraft();
     private final FontRenderer fontRenderer;
     private static final int TEXT_COLOR = 0xFFFFFFFF;              // White text
     private static final int PADDING = 5; // Reduced padding for "gamesense style"
+    
     // Added ResourceLocation for the gradient texture
     private static final ResourceLocation GRADIENT_TEXTURE = new ResourceLocation("amethyst", "image/gradient1.png");
     private static final float BACKGROUND_ALPHA = 0.65f; // Opacity for the gradient background

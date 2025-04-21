@@ -1,11 +1,24 @@
 package com.amethyst;
 
 import com.amethyst.gui.GameInfoGui;
+import com.amethyst.gui.ClickGui;
+import com.amethyst.module.ModuleManager;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.Mod.EventHandler;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
+import net.minecraftforge.fml.client.registry.ClientRegistry;
+import net.minecraft.client.settings.KeyBinding;
+import org.lwjgl.input.Keyboard;
+import com.amethyst.commands.AmethystCommand;
+import net.minecraftforge.client.ClientCommandHandler;
+import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.gameevent.InputEvent;
+import net.minecraft.client.Minecraft;
+import com.amethyst.util.RenderUtil;
+
+import java.awt.*;
 
 @Mod(modid = AmethystClient.MODID, version = AmethystClient.VERSION, name = AmethystClient.NAME)
 public class AmethystClient {
@@ -14,16 +27,28 @@ public class AmethystClient {
     public static final String NAME = "Amethyst Client";
 
     private GameInfoGui gameInfoGui;
+    private static final KeyBinding openGuiKey = new KeyBinding("ClickGUI", Keyboard.KEY_G, "key.categories.amethyst");
+    public static final ModuleManager moduleManager = new ModuleManager();
+    private final ClickGui clickGui = new ClickGui();
 
     @EventHandler
     public void init(FMLInitializationEvent event) {
         gameInfoGui = new GameInfoGui();
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(gameInfoGui);
+        ClientRegistry.registerKeyBinding(openGuiKey);
+        ClientCommandHandler.instance.registerCommand(new AmethystCommand());
     }
-    
+
     @EventHandler
     public void serverStarting(FMLServerStartingEvent event) {
         com.amethyst.commands.CommandManager.registerCommands(event);
+    }
+
+    @SubscribeEvent
+    public void onKeyInput(InputEvent.KeyInputEvent event) {
+        if (openGuiKey.isPressed()) {
+            Minecraft.getMinecraft().displayGuiScreen(clickGui);
+        }
     }
 }

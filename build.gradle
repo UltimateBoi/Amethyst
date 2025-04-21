@@ -16,49 +16,48 @@ version = '1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+// def elementaVersion = "704" // Correct Elementa version
+// def ucVersion = "401" // Correct UniversalCraft version
+
 minecraft {
     version = "1.8.9-11.15.1.2318-1.8.9"
     runDir = "run"
     mappings = "stable_22"
     makeObfSourceJar = false
-    
-    clientRunArgs += "--tweakClass org.spongepowered.asm.launch.MixinTweaker"
-    clientJvmArgs += "-Dmixin.debug=true"
 }
 
 repositories {
     mavenCentral()
     maven {
-        name = 'SpongePowered'
-        url = 'https://repo.spongepowered.org/repository/maven-public/'
-    }
-    maven {
         name = 'Minecraft'
         url = 'https://libraries.minecraft.net/'
+    }
+    maven {
+        url "https://repo.essential.gg/repository/maven-public"
     }
 }
 
 configurations {
     implementation
     compile
-    annotationProcessor
 }
 
 dependencies {
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-    compile 'org.spongepowered:mixin:0.8.5'
     compile 'org.ow2.asm:asm-commons:5.2'
     compile 'com.google.guava:guava:17.0'
-} 
+    // implementation "gg.essential:elementa:$elementaVersion" // Use the specific version of Elementa
+    // implementation "gg.essential:universalcraft-1.8.9-forge:$ucVersion"
+}
 
 jar {
     manifest {
         attributes(
-            'TweakClass': 'org.spongepowered.asm.launch.MixinTweaker',
-            'MixinConfigs': 'mixins.amethyst.json',
             'FMLCorePluginContainsFMLMod': 'true',
             'ForceLoadAsMod': 'true'
         )
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
