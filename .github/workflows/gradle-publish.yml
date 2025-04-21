@@ -32,15 +32,15 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -x test --stacktrace
       - uses: actions/upload-artifact@v4
-        name: Upload Build Artifacts
+        name: Upload All Built JAR Files
         with:
-          name: "AmethystClient"
-          path: build/libs/*.jar
+          name: "Built JAR Files"
+          path: "**/build/libs/*.jar"
       - name: Test with Gradle
         run: ./gradlew test
       - uses: actions/upload-artifact@v4
-        name: "Upload test report"
+        name: "Upload Test Report"
         if: ${{ !cancelled() }}
         with:
           name: "Test Results"
-          path: build/reports/tests/test/
+          path: "**/build/reports/tests/**/*.html"
