@@ -32,9 +32,9 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build -x test --stacktrace
       - uses: actions/upload-artifact@v4
-        name: Upload All Built JAR Files
+        name: Upload Amethyst Artifact
         with:
-          name: "Built JAR Files"
+          name: "AmethystClient"
           path: "**/build/libs/*.jar"
       - name: Test with Gradle
         run: ./gradlew test
